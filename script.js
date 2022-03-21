@@ -119,7 +119,7 @@ function openVitrine() {
         const h2 = document.createElement("h2")
         const p = document.createElement("p")
         const p2 = document.createElement('p')
-        const span = document.createElement("span")
+        const spanValor = document.createElement("span")
         const spanAddCar = document.createElement("span")
         const a = document.createElement("a")
         a.href = "#addCarrinho"
@@ -131,10 +131,10 @@ function openVitrine() {
         h2.innerText = produtoAtual.nome
         p.innerText = produtoAtual.descricao
         p2.classList.add('valorCarrinho')
-        span.classList.add("valor")
-        span.innerText = 'R$' + produtoAtual.valor
-        span.classList.add("carrinho")
-        span.innerText = produtoAtual.add
+        spanValor.classList.add("valor")
+        spanValor.innerText = `R$ ${produtoAtual.valor},00`
+        spanAddCar.id = "carrinho"
+        a.innerText = produtoAtual.add
 
         ul.appendChild(li)
         li.appendChild(div)
@@ -143,7 +143,7 @@ function openVitrine() {
         li.appendChild(h2)
         li.appendChild(p)
         li.appendChild(p2)
-        p2.appendChild(span)
+        p2.appendChild(spanValor)
         p2.appendChild(spanAddCar)
         spanAddCar.appendChild(a)
 
