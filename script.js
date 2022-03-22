@@ -219,9 +219,24 @@ const todosList = document.querySelector('#Todos')
 todosList.addEventListener('click', FiltroNao)
 
 
+//_____________________________________________________________//
 
+function findButton() {
+    const inputValue = document.querySelector('#txtBusca')
 
+    if (inputValue.value === 'Acessorios') {
+        filtrarAcessorios()
+    } else if (inputValue.value === 'Blusas') {
+        filtrarBlusas()
+    } else if (inputValue.value === 'Calcas') {
+        filtrarCalcas()
+    } else if (inputValue.value === 'Todos') {
+        FiltroNao()
+    }
+}
 
+const listFinded = document.querySelector('#btnBusca')
+listFinded.addEventListener('click', findButton)
 
 //_____________________________________________________________//
 
