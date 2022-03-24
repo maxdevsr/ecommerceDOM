@@ -258,6 +258,7 @@ aside {
     opacity: 85%;
     color: white;
     font-weight: bold;
+    padding: 10px;
 }
 
 #localCompra {
