@@ -12,7 +12,8 @@ const vitrineShow = [{
         descricao: 'Moletom confortavel, quente e muito lindo, ideal para a epoca de frio!',
         valor: 250.00,
         add: 'Adicionar ao carrinho',
-        tags: ['Blusas']
+        tags: ['Blusas'],
+        quantidade: 0
     },
     {
         categoria: 'Blusas',
@@ -21,7 +22,8 @@ const vitrineShow = [{
         descricao: 'Camisa linda mostrando o escudo e o nosso grande raposao!!!',
         valor: 380.00,
         add: 'Adicionar ao carrinho',
-        tags: ['Blusas']
+        tags: ['Blusas'],
+        quantidade: 0
     },
     {
         categoria: 'Acessorios',
@@ -30,7 +32,8 @@ const vitrineShow = [{
         descricao: 'Belissima touca, muito confortavel, ideal para a epoca de frio e muito estilosa!!!',
         valor: 75.00,
         add: 'Adicionar ao carrinho',
-        tags: ['Acessorios']
+        tags: ['Acessorios'],
+        quantidade: 0
     },
     {
         categoria: 'Calcas',
@@ -39,7 +42,8 @@ const vitrineShow = [{
         descricao: 'Calca perfeita, otima para pratica de esportes!!!',
         valor: 280.00,
         add: 'Adicionar ao carrinho',
-        tags: ['Calcas']
+        tags: ['Calcas'],
+        quantidade: 0
     },
     {
         categoria: 'Blusas',
@@ -48,7 +52,8 @@ const vitrineShow = [{
         descricao: 'Camisa perfeita modelo antigo em alusao ao Palestra Italia!!',
         valor: 250.00,
         add: 'Adicionar ao carrinho',
-        tags: ['Blusas']
+        tags: ['Blusas'],
+        quantidade: 0
     },
     {
         categoria: 'Acessorios',
@@ -57,7 +62,8 @@ const vitrineShow = [{
         descricao: 'Mascara para protecao contra a COVID, para voce continuar vestindo o azul estrelado!!!',
         valor: 10.00,
         add: 'Adicionar ao carrinho',
-        tags: ['Acessorios']
+        tags: ['Acessorios'],
+        quantidade: 0
     }
 ]
 
@@ -93,7 +99,8 @@ function openVitrine(arrayDaVitrine) {
         const spanValor = document.createElement("span")
         const spanAddCar = document.createElement("span")
         const button = document.createElement("button")
-        button.id = "addCarrinho"
+        button.classList.add("addCarrinho")
+        button.id = 0 + indice
         img.src = produtoAtual.imagem
 
         li.classList.add("configLi")
@@ -134,7 +141,9 @@ function asiaside() {
     input.type = 'text'
     input.id = 'txtBusca'
     input.placeholder = 'O que voce procura?'
-    const button = document.createElement('button')
+    const button = document.createElement('input')
+    button.type = 'button'
+    button.value = 'Pesquisar'
     button.id = 'btnBusca'
     button.innerText = 'Pesquisar'
 
@@ -156,12 +165,8 @@ function asiaside() {
     somaCar.id = 'finalCompra'
     const spanQuant = document.createElement('span')
     spanQuant.id = 'result1'
-    const quantiItens = orgarnizarCar.length
-    spanQuant.innerHTML = `Quantidade: ` + quantiItens
-    console.log(quantiItens)
     const spanSoma = document.createElement('span')
     spanSoma.id = 'result2'
-    spanSoma.innerText = 'Total: '
 
     divAside.appendChild(carLateral)
     carLateral.appendChild(spanNomeCar)
@@ -209,28 +214,28 @@ buscaAcessorios.addEventListener('click', filtrarAcessorios)
     //_________________________________________________
 
 function FiltroNao() {
-    const semFiltro = vitrineShow.filter((produtos) => {
-        return produtos.categoria
-    })
-    openVitrine(semFiltro)
+    // const semFiltro = vitrineShow.filter((produtos) => {
+    //     return produtos.categoria
+    //})
+    openVitrine(vitrineShow)
 }
 
 const todosList = document.querySelector('#Todos')
 todosList.addEventListener('click', FiltroNao)
 
 
-//_____________________________________________________________//
+//barra de pesquisa ____________________________________________//
 
 function findButton() {
     const inputValue = document.querySelector('#txtBusca')
 
-    if (inputValue.value === 'Acessorios') {
+    if (inputValue.value === 'Touca') {
         filtrarAcessorios()
-    } else if (inputValue.value === 'Blusas') {
+    } else if (inputValue.value === 'Camisa') {
         filtrarBlusas()
-    } else if (inputValue.value === 'Calcas') {
+    } else if (inputValue.value === 'Calca') {
         filtrarCalcas()
-    } else if (inputValue.value === 'Todos') {
+    } else if (inputValue.value === 'Cruzeiro') {
         FiltroNao()
     }
 }
@@ -238,36 +243,151 @@ function findButton() {
 const listFinded = document.querySelector('#btnBusca')
 listFinded.addEventListener('click', findButton)
 
-//_____________________________________________________________//
 
 const teste = document.querySelector('.vitrine')
-teste.addEventListener('click', addCarrinho)
 const orgarnizarCar = document.querySelector('#carrinhoNovo')
 
-/*categoria: 'Calcas',
-        nome: 'Calca Cruzeiro, modelo jogador',
-        imagem: "https://static3.tcdn.com.br/img/img_prod/1042930/calca_adidas_sere_19_trg_pnt_azul_74710_3_1893c26c4d5dd23b2de21a01b39f6d79.jpg",
-        descricao: 'Calca perfeita, otima para pratica de esportes!!!',
-        valor: 280.00,
-        add: 'Adicionar ao carrinho',
-        tags: ['Calcas']*/
+//ADD no carrinho_________________________________________________________//
 
+atualizarCarrinho = () => {
+    const orgarnizarCar = document.querySelector('#carrinhoNovo')
+    const result2 = document.querySelector('#result2')
+    result2.innerHTML = ''
 
-function addCarrinho(event) {
-    console.log(addCarrinho)
+    orgarnizarCar.innerHTML = ''
+    vitrineShow.map((produto) => {
+        if (produto.quantidade > 0) {
+            orgarnizarCar.innerHTML += `<li> <img src="${produto.imagem}"></img>` +
+                `<p>${produto.nome}</p>` +
+                `<p>R$${produto.valor},00</p></li>` +
+                `<p>Quantidade: ${produto.quantidade}</p>`
+            result2.innerHTML += `Total: ${produto.valor}`
+        }
+    })
+}
+
+const botaoAdd = document.getElementsByTagName('button')
+
+for (let i = 0; i < botaoAdd.length; i++) {
+    botaoAdd[i].addEventListener('click', function() {
+        let id = this.getAttribute('id')
+        vitrineShow[id].quantidade++
+            atualizarCarrinho()
+
+    })
+}
+
+/*function addCarrinho(event) {
     const aComprar = event.target
-    if (aComprar.tagName == 'BUTTON') {
-        const cardProduto = aComprar.closest('li')
-        const cardProdutoClone = cardProduto.cloneNode(true)
-            // for (let i = 0; i < cardProduto.length; i++) {
-            //     delete cardProduto[i].nome
-            //     delete cardProduto[i].descricao
-            //     delete cardProduto[i].add
-            // }
-        orgarnizarCar.appendChild(cardProdutoClone)
+    const carrinhoDin = document.createElement('li')
+    orgarnizarCar.appendChild(carrinhoDin)
 
+    const valor1 = document.querySelector('#precoLI')
+    const result2 = document.querySelector('#result2')
+    const somando = valor1
+    const resultado = []
+    console.log(resultado)
+    resultado.push(somando)
+
+
+
+
+    if (aComprar === funcCar0) {
+        carrinhoDin.innerHTML += `${vitrineShow[0].nome} <p></p>  <p></p> R$ <span id='precoLi'>${vitrineShow[0].valor}</span>,00<p></p>`
+    }
+    if (aComprar === funcCar1) {
+        carrinhoDin.innerHTML += `${vitrineShow[1].nome} <p></p>  <p></p> R$ <span id='precoLi'>${vitrineShow[1].valor}</span>,00<p></p>`
+    }
+    if (aComprar === funcCar2) {
+        carrinhoDin.innerHTML += `${vitrineShow[2].nome} <p></p>  <p></p> R$ <span id='precoLi'>${vitrineShow[2].valor}</span>,00<p></p>`
+    }
+    if (aComprar === funcCar3) {
+        carrinhoDin.innerHTML += `${vitrineShow[3].nome} <p></p>  <p></p> R$ <span id='precoLi'>${vitrineShow[3].valor}</span>,00<p></p>`
+    }
+    if (aComprar === funcCar4) {
+        carrinhoDin.innerHTML += `${vitrineShow[4].nome} <p></p>  <p></p> R$ <span id='precoLi'>${vitrineShow[4].valor}</span>,00<p></p>`
+    }
+    if (aComprar === funcCar5) {
+        carrinhoDin.innerHTML += `${vitrineShow[5].nome} <p></p>  <p></p> R$ <span id='precoLi'>${vitrineShow[5].valor}</span>,00<p></p>`
     }
 }
+const funcCar0 = document.querySelector('#addCarrinho0')
+funcCar0.addEventListener('click', addCarrinho)
+const funcCar1 = document.querySelector('#addCarrinho1')
+funcCar1.addEventListener('click', addCarrinho)
+const funcCar2 = document.querySelector('#addCarrinho2')
+funcCar2.addEventListener('click', addCarrinho)
+const funcCar3 = document.querySelector('#addCarrinho3')
+funcCar3.addEventListener('click', addCarrinho)
+const funcCar4 = document.querySelector('#addCarrinho4')
+funcCar4.addEventListener('click', addCarrinho)
+const funcCar5 = document.querySelector('#addCarrinho5')
+funcCar5.addEventListener('click', addCarrinho)
+*/
+//soma itens__________________________________//
+
+//let itensCarrinho = 0
+//Adicionar item no carrinho
+
+// const teste = document.querySelector('.vitrine')
+// const orgarnizarCar = document.querySelector('#carrinhoNovo')
+
+// function addCarrinho(event) {
+
+//     if (event.target.tagName === 'BUTTON') {
+//         console.log(event.target)
+//         const mini = event.target.parentNode.parentNode
+//             //const imgSrc = mini.getElementsByTagName('img')[0].imagem
+//         const titleText = mini.getElementsByTagName('h2')[0].innerText
+//         const value = mini.getElementsByClassName('valor')[0].innerText
+
+//         let li = document.createElement('li')
+//         let img = document.createElement('img')
+//         let h2 = document.createElement('h2')
+//         let span = document.createElement('span')
+//         let a = document.createElement('a')
+
+//         li.classList.add('li-internaCarrinho')
+//         img.classList.add('info-carrinho-produto-img')
+//         h2.classList.add('carrinho-produtos-titulo')
+//         span.classList.add('carrinho-produtos-price')
+//         a.classList.add('carrinho-produtos-remove')
+
+//         //img.src = imgSrc
+
+//         h2.innerText = titleText
+//         span.innerText = value
+//         a.innerText = 'Remover produto'
+
+//         const orgarnizarCar = document.querySelector('#carrinhoNovo')
+//         orgarnizarCar.appendChild(li)
+//         li.appendChild(h2)
+//         li.appendChild(span)
+//         li.appendChild(a)
+//         li.appendChild(img)
+
+//         itensCarrinho++
+//     }
+// }
+
+/*categoria: 'Calcas',
+nome: 'Calca Cruzeiro, modelo jogador',
+imagem: "https://static3.tcdn.com.br/img/img_prod/1042930/calca_adidas_sere_19_trg_pnt_azul_74710_3_1893c26c4d5dd23b2de21a01b39f6d79.jpg",
+descricao: 'Calca perfeita, otima para pratica de esportes!!!',
+valor: 280.00,
+add: 'Adicionar ao carrinho',
+tags: ['Calcas']
+
+
+if (aComprar.tagName == 'BUTTON') {
+    const cardProduto = aComprar.closest('li')
+    const cardProdutoClone = cardProduto.cloneNode(true)
+    orgarnizarCar.appendChild(cardProdutoClone)
+    
+}*/
+
+
+
 
 // const finalQuanti = 0
 
