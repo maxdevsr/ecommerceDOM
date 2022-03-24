@@ -165,8 +165,10 @@ function asiaside() {
     somaCar.id = 'finalCompra'
     const spanQuant = document.createElement('span')
     spanQuant.id = 'result1'
+    spanQuant.innerHTML = 'Quantidade: '
     const spanSoma = document.createElement('span')
     spanSoma.id = 'result2'
+    spanSoma.innerHTML = 'Total: '
 
     divAside.appendChild(carLateral)
     carLateral.appendChild(spanNomeCar)
@@ -251,17 +253,14 @@ const orgarnizarCar = document.querySelector('#carrinhoNovo')
 
 atualizarCarrinho = () => {
     const orgarnizarCar = document.querySelector('#carrinhoNovo')
-    const result2 = document.querySelector('#result2')
-    result2.innerHTML = ''
 
     orgarnizarCar.innerHTML = ''
     vitrineShow.map((produto) => {
         if (produto.quantidade > 0) {
             orgarnizarCar.innerHTML += `<li> <img src="${produto.imagem}"></img>` +
-                `<p>${produto.nome}</p>` +
-                `<p>R$${produto.valor},00</p></li>` +
-                `<p>Quantidade: ${produto.quantidade}</p>`
-            result2.innerHTML += `Total: ${produto.valor}`
+                `<h1>${produto.nome}</h1>` +
+                `<h1>R$${produto.valor},00</p>` +
+                `<h3>Quantidade: ${produto.quantidade}</h3></li>`
         }
     })
 }
@@ -275,7 +274,22 @@ for (let i = 0; i < botaoAdd.length; i++) {
             atualizarCarrinho()
 
     })
+
+
 }
+
+for (let i = 0; i < botaoAdd.length; i++) {
+    botaoAdd[i].addEventListener('click', function() {
+        let quantItens = 0
+        console.log(quantItens)
+        quantItens + 1
+
+    })
+
+
+}
+
+
 
 /*function addCarrinho(event) {
     const aComprar = event.target

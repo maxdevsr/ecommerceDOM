@@ -8,6 +8,9 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    background-image: url(imagem.img/wall-1846965_1920.jpg);
+    background-size: auto;
+    height: 100%;
 }
 
 header {
@@ -81,6 +84,19 @@ main {
     width: 300px;
     align-content: flex-start;
     flex-direction: column;
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    background: black;
+    opacity: 85%;
+    padding-left: 10px;
+}
+
+.vitrine li:hover {
+    cursor: pointer;
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .vitrine {
@@ -114,18 +130,18 @@ main {
     width: 72px;
     height: 26px;
     padding: 5px;
-    background: #2E245E;
+    background: #69cadc;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    color: rgb(255, 255, 255);
+    color: rgb(10, 10, 10);
     margin-bottom: 5px;
     border-radius: 3px;
 }
 
 h2 {
-    color: #333333;
+    color: #fbffff;
     font-size: 18px;
     line-height: 24px;
     font-family: Inter;
@@ -137,7 +153,8 @@ h2 {
 p {
     font-size: 12;
     line-height: 16px;
-    color: #828282;
+    color: #fdfdfd;
+    font-weight: bold;
     font-family: Inter;
     font-style: normal;
     font-weight: normal;
@@ -152,7 +169,7 @@ p {
     line-height: 16px;
     /* identical to box height, or 133% */
     /* color-primary */
-    color: #2E245E;
+    color: #ffffff;
     margin-bottom: 8px;
 }
 
@@ -173,7 +190,7 @@ p {
     /* identical to box height, or 114% */
     text-decoration-line: underline;
     /* grey-50 */
-    color: #828282;
+    color: #ffffff;
 }
 
 aside {
@@ -232,6 +249,17 @@ aside {
     margin-bottom: 10px;
 }
 
+#carrinhoNovo li img {
+    border-radius: 5px;
+}
+
+#carrinhoNovo li {
+    background: black;
+    opacity: 85%;
+    color: white;
+    font-weight: bold;
+}
+
 #localCompra {
     display: flex;
     width: 347px;
@@ -268,7 +296,7 @@ img:hover {
 }
 
 #btnBusca:hover {
-    background-color: #370fff;
+    background-color: #1945a3;
 }
 
 #carrinhoNovo img {
@@ -279,5 +307,5 @@ img:hover {
 .carrinho button:hover {
     font-size: 15px;
     font-weight: bold;
-    color: blue;
+    color: rgb(255, 0, 25);
 }
