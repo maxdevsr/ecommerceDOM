@@ -2,15 +2,17 @@ body {
     display: flex;
     height: 100vh;
     flex-direction: column;
+    font-family: cursive;
 }
 
 .alinharTudo {
     display: flex;
     flex-wrap: wrap;
+    background-color: #133F7D;
     justify-content: space-around;
-    background-image: url(imagem.img/wall-1846965_1920.jpg);
+    /* background-image: url(imagem.img/wall-1846965_1920.jpg); */
     background-size: auto;
-    height: 100%;
+    /* height: 100%; */
 }
 
 header {
@@ -127,7 +129,7 @@ main {
 }
 
 .bottomTit {
-    width: 72px;
+    width: 90px;
     height: 26px;
     padding: 5px;
     background: #69cadc;
@@ -178,6 +180,10 @@ p {
     flex-direction: column;
 }
 
+#estrelas {
+    color: gold;
+}
+
 .carrinho button {
     background: transparent;
     border: none;
@@ -225,9 +231,11 @@ aside {
 #btnBusca {
     width: 96px;
     height: 48px;
-    background: #6B54DE;
+    background: rgb(0 173 233);
     color: white;
     margin-bottom: 10px;
+    cursor: pointer;
+    margin-left: 7px;
 }
 
 #carCompra {
@@ -237,7 +245,7 @@ aside {
     width: 347px;
     height: 50px;
     /* color-secondary */
-    background: #6B54DE;
+    background: rgb(0 173 233);
     color: white;
     font-family: Inter;
     font-style: normal;
@@ -259,6 +267,16 @@ aside {
     color: white;
     font-weight: bold;
     padding: 10px;
+}
+
+.barraDoCarrinho {
+    overflow-y: scroll;
+    height: 333px;
+    width: 347px;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
 }
 
 #localCompra {
